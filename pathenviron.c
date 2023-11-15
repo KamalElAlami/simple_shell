@@ -3,10 +3,6 @@
 /**
  * _pathenviron - Find executable file in PATH environment
  *
- * This function searches for an executable file by name within the directories
- * listed in the PATH environment variable. If found, it returns the full path to
- * the executable file.
- *
  * @cmd: The name of the executable file to search for.
  *
  * Return: The full path to the executable file, or NULL if not found.

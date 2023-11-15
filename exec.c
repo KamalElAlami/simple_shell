@@ -3,11 +3,6 @@
 /**
  * _exec - Execute a command
  *
- * This function executes a command by creating a child process using
- * `fork()` and then calling `execve()` in the child process. It also
- * handles command not found errors and returns the exit status of the
- * executed command.
- *
  * @cmd: An array of strings representing the command and its arguments.
  * @av: An array of strings representing the program name and its arguments.
  * @cnter: The line number where the command was executed.

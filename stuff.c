@@ -3,14 +3,11 @@
 /**
  * freestrarr - Free memory allocated for an array of strings
  *
- * This function takes an array of strings as input and frees the memory
- * allocated for each string and the array itself.
- *
  * @array: The array of strings to free.
  */
 
 
-void	freestrarr(char **array)
+void	freestrarr(char **array, int i)
 {
 	int i;
 
@@ -27,9 +24,6 @@ void	freestrarr(char **array)
 
 /**
  * str_rev - Reverse a string in-place
- *
- * This function reverses the order of characters in a given string
- * in-place, up to a specified index.
  *
  * @buffer: The string to reverse.
  * @i: The index up to which the string should be reversed.
@@ -54,9 +48,6 @@ void	str_rev(char *buffer, int i)
 
 /**
  * _itoa - Convert an integer to a string
- *
- * This function converts an integer to a string and returns the result
- * as a dynamically allocated string.
  *
  * @n: The integer to convert.
  *
@@ -88,10 +79,6 @@ char	*_itoa(int n)
 
 /**
  * _perror - Print a custom error message for command not found
- *
- * This function prints a custom error message to the standard output
- * when a command is not found. The message includes the program name,
- * command, and line number.
  *
  * @av: The program name.
  * @cmd: The command that was not found.

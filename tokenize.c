@@ -3,10 +3,6 @@
 /**
  * tokenize - Tokenize a string into an array of strings
  *
- * This function takes a string as input and tokenizes it into an array of
- * strings using a specified delimiter. The resulting array is suitable for
- * use as command arguments.
- *
  * @line: The string to tokenize.
  *
  * Return: An array of strings representing the tokenized input, or NULL

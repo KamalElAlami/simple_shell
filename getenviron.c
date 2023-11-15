@@ -3,9 +3,6 @@
 /**
  * _getenviron - Get environment variable value
  *
- * This function searches for an environment variable by name and returns
- * its value as a dynamically allocated string.
- *
  * @cmd: The name of the environment variable to retrieve.
  *
  * Return: The value of the environment variable, or NULL if not found.

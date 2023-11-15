@@ -3,10 +3,6 @@
 /**
  * main - Entry point for the simple shell program
  *
- * This is the main function of a simple shell program. It repeatedly
- * reads input lines, tokenizes them into commands, and executes the
- * commands. The program continues to run until an exit condition is met.
- *
  * @ac: The number of command-line arguments (unused in this context).
  * @av: An array of command-line arguments (unused in this context).
  *
