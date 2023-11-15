@@ -9,35 +9,13 @@
  * Return: The exit status of the shell program.
  */
 
-int	main(int ac, char **av)
+int main(int argc, char **argv, char **environ)
 {
-	char *line;
-	char **cmd;
-	int stts, cnter;
-	(void) ac;
+	(void)argc;
 
-	line = NULL;
-	cmd = NULL;
-	stts = 0;
-	cnter = 0;
-	while (1)
-	{
-		line = track_lines();
-		if (line == NULL)
-		{
-			if (isatty(STDIN_FILENO))
-			{
-				write(STDOUT_FILENO, "\n", 1);
-			}
-			return (stts);
-		}
-		cnter++;
-
-		cmd = tokenize(line);
-		if (cmd == NULL)
-		{
-			continue;
-		}
-		stts = _exec(cmd, av, cnter);
-	}
+	if (isatty(STDIN_FILENO))
+		func_loop(environ, argv[0]);
+	else
+		no_interactive(environ, argv[0]);
+	return (0);
 }

@@ -1,11 +1,10 @@
 #include "main.h"
 
 /**
- * _getenviron - Get environment variable value
- *
- * @cmd: The name of the environment variable to retrieve.
- *
- * Return: The value of the environment variable, or NULL if not found.
+ * _getenv - get env.
+ * @environ: environment variables.
+ * @variable: variable.
+ * Return: result.
  */
 
 char *_getenv(char **environ, char *variable)
@@ -50,12 +49,14 @@ char *_getenv(char **environ, char *variable)
 	free(path);
 	return (result);
 }
+
 /**
  * check_exec - check exec.
  * @path: path.
  * @command: command.
  * Return: NULL.
  */
+
 char *check_exec(char *path, char *command)
 {
 	char *dir = NULL, *dir_command = NULL;
@@ -81,6 +82,7 @@ char *check_exec(char *path, char *command)
 	}
 	return (NULL);
 }
+
 /**
  * divpath - separate the string PATH into arguments.
  * @argv: pointer string.
@@ -89,6 +91,7 @@ char *check_exec(char *path, char *command)
  * @file: file
  * Return: 0
  */
+
 int divpath(char **argv, char *file, char **environ, int count)
 {
 	char *env = NULL, *copy = NULL;
@@ -122,6 +125,7 @@ int divpath(char **argv, char *file, char **environ, int count)
 	}
 	return (out);
 }
+
 /**
  * search_command - find and run a command.
  * @argv: user-given arguments.
@@ -130,6 +134,7 @@ int divpath(char **argv, char *file, char **environ, int count)
  * @count: count
  * Return: out
  */
+
 int search_command(char **argv, char *file, char **environ, int count)
 {
 	int entry, out = 0;
