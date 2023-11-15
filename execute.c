@@ -1,27 +1,26 @@
-#include "shell.h"
+#include "main.h"
 
 /**
- * execute - forks to child process to execute command
- * @fullPath: full directory with command
- * @command: user input
- * Return: status
+ * execute - execute command path, child process
+ * @args: arguments
+ * Return: exit status
  */
-int execute(char *fullPath, char **command)
-{
-	pid_t child;
-	int status = 0;
-	struct stat st;
 
-	child = fork();
-	if (child == 0)
+int execute(char **args)
+{
+	int id = fork(), status;
+
+	if (id == 0)
 	{
-		if (stat(fullPath, &st) == 0)
-		{
-			status = execve(fullPath, command, environ);
-			exit(status);
-		}
+		if (execve(args[0], args, environ) == -1)
+			perror("Error");
 	}
 	else
-		wait(NULL);
+	{
+		wait(&status);
+		if (WIFEXITED(status))
+			status = WEXITSTATUS(status);
+	}
+
 	return (status);
 }
