@@ -1,21 +1,15 @@
-#include "main.h"
-
+#include "shell.h"
 /**
- * main - Entry point for the simple shell program
- *
- * @ac: The number of command-line arguments (unused in this context).
- * @av: An array of command-line arguments (unused in this context).
- *
- * Return: The exit status of the shell program.
+ * main - main function
+ * @argc: number of arguements
+ * @argv: arguement
+ * @envp: program’s environment
+ * Return: 0 for sucess
  */
-
-int main(int argc, char **argv, char **environ)
+int main(int argc, char **argv, char **envp)
 {
-	(void)argc;
+	if (argc == 1 || argv[1] == NULL)
+	loop(envp);
 
-	if (isatty(STDIN_FILENO))
-		func_loop(environ, argv[0]);
-	else
-		no_interactive(environ, argv[0]);
 	return (0);
 }
