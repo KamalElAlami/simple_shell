@@ -1,27 +1,18 @@
-#include "main.h"
+#include "shell.h"
 
 /**
- * _calloc - function that allocates memory for an array, using malloc
- * @nmemb: array
- * @size: size
- * Return: pointer or NULL
+ * bfree - release a pointer and set the address to NULL
+ * @ptr: address of the free pointer.
+ *
+ * Return: If released, 1; if not, 0.
  */
-
-void *_calloc(unsigned int nmemb, unsigned int size)
+int bfree(void **ptr)
 {
-	unsigned int index = 0;
-	char *ptr = NULL;
-
-	if (nmemb == 0 || size == 0)
-		return (NULL);
-
-	ptr = malloc(nmemb * size);
-
-	if (ptr == NULL)
-		return (NULL);
-
-	for (; index < (nmemb * size); index++)
-		ptr[index] = 0;
-
-	return (ptr);
+	if (ptr && *ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+		return (1);
+	}
+	return (0);
 }

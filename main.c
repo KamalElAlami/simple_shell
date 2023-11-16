@@ -1,50 +1,44 @@
-#include "main.h"
+#include "shell.h"
 
 /**
- * main - open shell, project base
- * Return: int
+ * main - point of entry
+ * @ac: an arg count
+ * @av: vector args
+ *
+ * Return: 1 on failure, 0 on success
  */
-
-int main(void)
+int main(int ac, char **av)
 {
-	char *buff = NULL, **args;
-	size_t read_size = 0;
-	ssize_t buff_size = 0;
-	int exit_status = 0;
+	info_t info[] = { INFO_INIT };
+	int fd = 2;
 
-	while (1)
+	asm ("mov %1, %0\n\t"
+		"add $3, %0"
+		: "=r" (fd)
+		: "r" (fd));
+
+	if (ac == 2)
 	{
-		if (isatty(0))
-			printf("hsh$ ");
-
-		buff_size = getline(&buff, &read_size, stdin);
-		if (buff_size == -1 || _strcmp("exit\n", buff) == 0)
+		fd = open(av[1], O_RDONLY);
+		if (fd == -1)
 		{
-			free(buff);
-			break;
+			if (errno == EACCES)
+				exit(126);
+			if (errno == ENOENT)
+			{
+				_eputs(av[0]);
+				_eputs(": 0: Can't open ");
+				_eputs(av[1]);
+				_eputchar('\n');
+				_eputchar(BUF_FLUSH);
+				exit(127);
+			}
+			return (EXIT_FAILURE);
 		}
-		buff[buff_size - 1] = '\0';
-
-		if (_strcmp("env", buff) == 0)
-		{
-			_env();
-			continue;
-		}
-
-		if (empty_line(buff) == 1)
-		{
-			exit_status = 0;
-			continue;
-		}
-
-		args = _split(buff, " ");
-		args[0] = search_path(args[0]);
-
-		if (args[0] != NULL)
-			exit_status = execute(args);
-		else
-			perror("Error");
-		free(args);
+		info->readfd = fd;
 	}
-	return (exit_status);
+	populate_env_list(info);
+	read_history(info);
+	hsh(info, av);
+	return (EXIT_SUCCESS);
 }
